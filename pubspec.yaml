@@ -37,6 +37,11 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_svg: ^2.0.10 # libraly for SVG usage in our project
   provider: ^6.1.2 # libaraly for state management
+  carousel_slider: ^5.0.0 # slider image
+  fluttertoast: ^8.2.8  # toast message
+  shared_preferences: ^2.3.2 # shared  preferences
+
+
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +76,7 @@ flutter:
   assets:
   - assets/icons/
   - assets/images/
+  - assets/images/avatar.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

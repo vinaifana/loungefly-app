@@ -1,6 +1,5 @@
 
 import 'package:e_commerce/consts.dart';
-import 'package:e_commerce/ui/home/catalogue_screen.dart';
 import 'package:e_commerce/ui/splash/component/splash_content.dart';
 import 'package:flutter/material.dart';
 
@@ -80,11 +79,7 @@ class _BodyState extends State<Body> {
                   onPressed: () {
                     if (currentPage == splashData.length - 1) { //berpindah sesuai data
                       //untuk perpindahan antar halaman 
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CatalogueScreen())
-                      );
+                      Navigator.pushNamed(context, '/login');
                     } else {
                       _pageController.animateToPage(
                         currentPage + 1,
