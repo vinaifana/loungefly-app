@@ -1,19 +1,24 @@
 import 'package:e_commerce/consts.dart';
+import 'package:e_commerce/profile/profile_screen.dart';
 import 'package:e_commerce/settings/settings_screen.dart';
+import 'package:e_commerce/state-management/cart_provider.dart';
 import 'package:e_commerce/state-management/theme_povider.dart';
 import 'package:e_commerce/ui/auth/login_screen.dart';
 import 'package:e_commerce/ui/auth/register_screen.dart';
 import 'package:e_commerce/ui/home/catalogue_screen.dart';
 import 'package:e_commerce/ui/splash/splash_screen.dart';
+import 'package:e_commerce/wishlist/favorite_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-    //placeholder untuk template provider yang belum terdefinisi
-    create: (_) => ThemeProvider(),
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => ThemeProvider()),
+      ChangeNotifierProvider(create: (_) => CartProvider()),
+    ],
     child: const Loungefly()
-    )
+  )
   );
 }
 
@@ -51,12 +56,12 @@ class _LoungeflyState extends State<Loungefly> {
             '/register': (context) => RegisterScreen(),
             '/catalogue': (context) => const CatalogueScreen(),
             '/settings': (context) => const SettingsScreen(),
-            // '/favorite': (context) => const FavoriteScreen(),
+            '/favorite': (context) => const FavoriteScreen(),
+            '/profile': (context) => const ProfileScreen(),
             // '/settings': (context) => SettingsScreen(
             //   isDarkTheme: _isDarkTheme,
             //   onThemeChanged: _toggleTheme,
             // ),
-            // '/profile': (context) => const ProfileScreen(),
           }
         );
        }, 
@@ -70,3 +75,6 @@ class _LoungeflyState extends State<Loungefly> {
 //        isDarkTheme: _isDarkTheme,
 //        onThemeChanged: _toggleTheme
 //      ),
+// change notifier adalah kelas wajib yang harus diambil karakternya dengan menggunakan provicer untuk mewariskanya
+// state management adalah class yang berfungi untuk membantu mengelola UI, membantu mengelola data yang dinamis, membantu mengurangi adanya boiler plate (kode yang ditulis secara berulang)
+// agar kode yang ditulis menjadi efisien dan mudah di kelola.

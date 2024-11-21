@@ -2,6 +2,7 @@ import 'package:e_commerce/consts.dart';
 import 'package:e_commerce/models/products.dart';
 import 'package:e_commerce/profile/profile_screen.dart';
 import 'package:e_commerce/settings/settings_screen.dart';
+import 'package:e_commerce/ui/cart/cart.dart';
 import 'package:e_commerce/ui/detail/components/detail_screen.dart';
 import 'package:e_commerce/ui/home/components/banner_image.dart';
 import 'package:e_commerce/ui/home/components/bottom_nav_bar.dart';
@@ -69,7 +70,12 @@ class _CatalogueScreenState extends State<CatalogueScreen> {
             icon: const Icon(Icons.search)
           ),
           IconButton(
-            onPressed: () {}, 
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CartScreen())
+              );
+            }, 
             icon: const Icon(Icons.shopping_cart_outlined)
           )
         ],

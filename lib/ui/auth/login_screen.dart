@@ -44,6 +44,9 @@ class LoginPage extends StatelessWidget {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "Email is Required";
+                  } 
+                  if (!value.endsWith("@gmail.com")) {
+                    return "Please fill with valid email";
                   }
                   return null;
                 }

@@ -39,7 +39,7 @@ dependencies:
   provider: ^6.1.2 # libaraly for state management
   carousel_slider: ^5.0.0 # slider image
   fluttertoast: ^8.2.8  # toast message
-  shared_preferences: ^2.3.2 # shared  preferences
+  shared_preferences: ^2.3.2 # shared  preferences (untuk menyimpan data secara local, dan disimpan dengan bentuk key-value)
 
 
 

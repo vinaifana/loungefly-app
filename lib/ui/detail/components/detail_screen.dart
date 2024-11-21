@@ -65,7 +65,7 @@ class DetailScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CartCounter(),
-                            FavButton()
+                            // FavButton(product: product)
                           ],
                         ),
                         const SizedBox(height: defaultPadding),
