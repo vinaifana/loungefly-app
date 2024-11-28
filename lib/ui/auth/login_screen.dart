@@ -1,112 +1,160 @@
+import 'package:e_commerce/consts.dart';
+import 'package:e_commerce/ui/auth/register_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatelessWidget {
-  // const LoginPage({super.key});
-
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
-  final  _passwordController = TextEditingController();
-  final FToast fToast = FToast();
+  final _passwordController = TextEditingController();
 
   LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    fToast.init(context); 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: Container(
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+        ),
         child: Form(
           key: _formKey,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "Welcome Back!",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold
+              // Gambar mentok ke atas dan lebar layar
+              SizedBox(
+                width: double.infinity,  // Membuat gambar memenuhi lebar layar
+                height: 350,  // Atur tinggi gambar sesuai kebutuhan
+                child: Image.asset(
+                  "assets/images/login_banner.png", // Pastikan path-nya benar
+                  fit: BoxFit.cover,  // Menyesuaikan gambar dengan ukuran container
                 ),
               ),
-              const SizedBox(height: 20),
-              TextFormField
-              (
-                controller: _emailController,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder()
-                ),
-                // untuk validasi apakah value yang dimasukan user valid atau tidak (ini juga berguna untuk menampilkan bahwa form ini mandatory atau wajib di isi)
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Email is Required";
-                  } 
-                  if (!value.endsWith("@gmail.com")) {
-                    return "Please fill with valid email";
-                  }
-                  return null;
-                }
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                controller: _passwordController,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder()
-                ),
-                obscureText: true,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Password is Required";
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    //if the validation succes it will navigate to HomeScreen
-                    fToast.showToast(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 45.0, vertical: 20.0),
-                        constraints: BoxConstraints(
-                          maxWidth: MediaQuery.of(context).size.width * 0.8, 
-                        ),
-                        decoration: BoxDecoration(
+              const SizedBox(height: 20),  // Memberikan sedikit jarak antara gambar dan form
+              // Form inputan di bawah gambar
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Welcome Back!",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    const SizedBox(height: 24.0),
+                    TextFormField(
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                        labelText: "Email",
+                        labelStyle: const TextStyle(
                           color: Colors.black,
-                          borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: const Text(
-                          "Login Successfully",
-                          style: TextStyle(color: Colors.white),
-                          textAlign: TextAlign.center,
+                        enabledBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                            width: 1.0,
+                          ),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: secondaryColor,
+                            width: 1.7,
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(18)
                         ),
                       ),
-                      gravity: ToastGravity.BOTTOM,
-                      toastDuration: const Duration(seconds: 2),
-                    );
-                    Navigator.pushReplacementNamed(context, '/catalogue');
-                  }
-                }, 
-                child: const Text("Login")
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Email is required";
+                        }
+          
+                        if (!value.endsWith("@gmail.com")) {
+                          return "Please fill with valid email";
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      controller: _passwordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        labelText: "Password",
+                        labelStyle: const TextStyle(
+                          color: Colors.black,
+                        ),
+                        enabledBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                            width: 1.0,
+                          ),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: secondaryColor,
+                            width: 1.7,
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                           borderRadius: BorderRadius.circular(18)
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Password is required";
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 28),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        minimumSize: const Size(double.infinity, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)
+                        )
+                      ),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          //if the validation success, it will navigate
+                          Navigator.pushReplacementNamed(context, '/catalogue');
+                        }
+                      },
+                      child: const Text(
+                        "Login",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 160),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => RegisterScreen()),
+                        );
+                      },
+                      child: const Text(
+                        "Don't have an account yet? Register here",
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(height: 20),
-              TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(
-                    context, 
-                    '/register'
-                  );
-                }, 
-                child: const Text("Don't have any account? Create one")
-              )
             ],
-          )
+          ),
         ),
       ),
     );

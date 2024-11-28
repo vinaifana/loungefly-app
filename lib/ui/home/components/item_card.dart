@@ -5,7 +5,9 @@
 
 import 'package:e_commerce/consts.dart';
 import 'package:e_commerce/models/products.dart';
+import 'package:e_commerce/state-management/theme_povider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ItemCard extends StatelessWidget {
   const ItemCard({super.key, required this.product, required this.press});
@@ -15,6 +17,7 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return GestureDetector(
       onTap: press,
       child: Column(
@@ -24,7 +27,7 @@ class ItemCard extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(defaultPadding),
               decoration: BoxDecoration(
-                color: product.color,
+                color: themeProvider.isDarkTheme ? Colors.white : product.color,
                 borderRadius: BorderRadius.circular(16)
               ),
               child: Hero(
@@ -35,12 +38,15 @@ class ItemCard extends StatelessWidget {
           ),
           Text(
             product.title,
-            style: const TextStyle(
-              color: textColor,
+            style: TextStyle(
+              color: themeProvider.isDarkTheme ? Colors.white : textColor,
             ),
           ),
           Text(
-            "Rp ${product.price}"
+            "Rp ${product.price}",
+            style: TextStyle(
+              color: themeProvider.isDarkTheme ? Colors.white : textColor,
+            ),
           )
         ],
       ),

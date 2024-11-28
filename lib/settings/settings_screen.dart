@@ -22,7 +22,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.chevron_left_rounded),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/catalogue');
+          },
+          icon: const Icon(Icons.chevron_left_rounded),
+        ),
         title: const Center(
           child: Text(
             'Account And Settings',

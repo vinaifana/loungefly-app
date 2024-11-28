@@ -91,7 +91,9 @@
 // }
 
 import 'package:e_commerce/consts.dart';
+import 'package:e_commerce/state-management/theme_povider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int selectedIndex;
@@ -104,39 +106,41 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
+      items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
+          backgroundColor: themeProvider.isDarkTheme ? Colors.black : Colors.white,
           icon: Icon(
             Icons.home,
-            color: secondaryColor,
+            color: themeProvider.isDarkTheme ? Colors.white : secondaryColor,
           ),
           label: "Home"
         ),      
         BottomNavigationBarItem(
           icon: Icon(
             Icons.favorite,
-            color: secondaryColor,
+            color: themeProvider.isDarkTheme ? Colors.white : secondaryColor,
           ),
           label: "Favorite"
         ),      
         BottomNavigationBarItem(
           icon: Icon(
             Icons.settings,
-            color: secondaryColor,
+            color: themeProvider.isDarkTheme ? Colors.white : secondaryColor,
           ),
           label: "Settings"
         ),      
         BottomNavigationBarItem(
           icon: Icon(
             Icons.person,
-            color: secondaryColor,
+            color:themeProvider.isDarkTheme ? Colors.white : secondaryColor,
           ),
           label: "Profile"
         ),      
       ],
       currentIndex: selectedIndex,
-      selectedItemColor: secondaryColor,
+      selectedItemColor: themeProvider.isDarkTheme ? Colors.white : secondaryColor,
       onTap: onItemTapped,
     );
   }

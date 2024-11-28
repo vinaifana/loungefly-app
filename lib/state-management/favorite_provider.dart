@@ -4,8 +4,9 @@ class FavoriteItem {
   final String id;
   final String title;
   final int price;
+  final String image;
 
-  FavoriteItem({required this.id, required this.title, required this.price});
+  FavoriteItem(this.image, {required this.id, required this.title, required this.price});
 }
 
 class FavoriteProvider with ChangeNotifier{
@@ -15,14 +16,14 @@ class FavoriteProvider with ChangeNotifier{
 
   int get itemCount => _favoriteItems.length;
 
-  void addItemToFav(String id, String title, int price) {
+  void addItemToFav(String id, String title, int price, String image) {
     if (_favoriteItems.containsKey(id)) {
       return;
       // jika sudah ada item yang ditambahkan ke keranjang
     } else {
       _favoriteItems.putIfAbsent(
         id, 
-        () => FavoriteItem(id: id, title: title, price: price)
+        () => FavoriteItem(image, id: id, title: title, price: price,)
       );
     }
     notifyListeners();
@@ -34,6 +35,7 @@ class FavoriteProvider with ChangeNotifier{
   }
 
   void clearFav() {
+    // method clear tidak perlu di triger, karna dia memang sudah di triger di notifyListeners()s
     _favoriteItems.clear();
     notifyListeners();
   }

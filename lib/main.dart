@@ -2,9 +2,11 @@ import 'package:e_commerce/consts.dart';
 import 'package:e_commerce/profile/profile_screen.dart';
 import 'package:e_commerce/settings/settings_screen.dart';
 import 'package:e_commerce/state-management/cart_provider.dart';
+import 'package:e_commerce/state-management/favorite_provider.dart';
 import 'package:e_commerce/state-management/theme_povider.dart';
 import 'package:e_commerce/ui/auth/login_screen.dart';
 import 'package:e_commerce/ui/auth/register_screen.dart';
+import 'package:e_commerce/ui/cart/cart_screen.dart';
 import 'package:e_commerce/ui/home/catalogue_screen.dart';
 import 'package:e_commerce/ui/splash/splash_screen.dart';
 import 'package:e_commerce/wishlist/favorite_screen.dart';
@@ -16,6 +18,7 @@ void main() {
     providers: [
       ChangeNotifierProvider(create: (_) => ThemeProvider()),
       ChangeNotifierProvider(create: (_) => CartProvider()),
+      ChangeNotifierProvider(create: (_) => FavoriteProvider()),
     ],
     child: const Loungefly()
   )
@@ -56,6 +59,7 @@ class _LoungeflyState extends State<Loungefly> {
             '/register': (context) => RegisterScreen(),
             '/catalogue': (context) => const CatalogueScreen(),
             '/settings': (context) => const SettingsScreen(),
+            '/cart': (context) => const CartScreen(),
             '/favorite': (context) => const FavoriteScreen(),
             '/profile': (context) => const ProfileScreen(),
             // '/settings': (context) => SettingsScreen(

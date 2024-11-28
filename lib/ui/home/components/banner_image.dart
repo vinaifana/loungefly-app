@@ -11,7 +11,9 @@ class BannerImage extends StatefulWidget {
 class _BannerImageState extends State<BannerImage> {
 
   final List<String> imgList = [
-    'assets/images/test_image_banner.png',
+    'assets/images/banner_img1.jpg',
+    'assets/images/banner_img2.jpg',
+    'assets/images/banner_img3.jpg',
   ];
 
   @override

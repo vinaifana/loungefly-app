@@ -1,5 +1,6 @@
 import 'package:e_commerce/consts.dart';
 import 'package:e_commerce/models/products.dart';
+import 'package:e_commerce/state-management/theme_povider.dart';
 import 'package:e_commerce/ui/detail/components/add_to_cart.dart';
 import 'package:e_commerce/ui/detail/components/cart_counter.dart';
 import 'package:e_commerce/ui/detail/components/color_and_size.dart';
@@ -7,6 +8,7 @@ import 'package:e_commerce/ui/detail/components/description.dart';
 import 'package:e_commerce/ui/detail/components/fav_button.dart';
 import 'package:e_commerce/ui/detail/components/product_title.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({super.key, required this.product});
@@ -14,20 +16,26 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int quantity = 1;
+    final themeProvider = Provider.of<ThemeProvider>(context);
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: product.color,
       appBar: AppBar(
         backgroundColor: product.color,
+        iconTheme: IconThemeData(
+          color: themeProvider.isDarkTheme ? Colors.black : Colors.black87
+        ),
         elevation: 0,
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.search),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.shopping_cart_outlined),
+            onPressed: () {
+              Navigator.pushNamed(context, '/cart');
+            },
+            icon: Icon(
+              Icons.shopping_cart_outlined,
+              color: themeProvider.isDarkTheme ? Colors.black : Colors.black87,
+            ),
           ),
         ],
       ),
@@ -61,15 +69,17 @@ class DetailScreen extends StatelessWidget {
                         const SizedBox(height: defaultPadding),
                         Description(product: product),
                         const SizedBox(height: defaultPadding),
-                        const Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            CartCounter(),
-                            // FavButton(product: product)
+                            CartCounter(product: product, onQuantityChanged: (currentQuantity) {
+                              quantity = currentQuantity;
+                            } ),
+                            FavButton(product: product)
                           ],
                         ),
                         const SizedBox(height: defaultPadding),
-                        AddToCart(product: product),
+                        AddToCart(product: product, quantity: quantity)
                       ],
                     ),
                   ),

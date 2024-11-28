@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AddToCart extends StatelessWidget {
-  const AddToCart({super.key, required this.product});
+  const AddToCart({super.key, required this.product, required this.quantity});
 
   final Product product;
+  final int quantity;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +30,13 @@ class AddToCart extends StatelessWidget {
             ),
             child: IconButton(
               onPressed: () {
+                // untuk menambahkan item dengan cara memanggil method addItem yang berasal dari CartProvider
                 cartProvider.addItem(
                   product.id.toString(),
                   product.title,
-                  product.price
+                  product.price,
+                  product.image,
+                  quantity
                 );
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
@@ -56,7 +60,9 @@ class AddToCart extends StatelessWidget {
                 cartProvider.addItem(
                   product.id.toString(),
                   product.title,
-                  product.price
+                  product.price,
+                  product.image,
+                  quantity
                 );
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(

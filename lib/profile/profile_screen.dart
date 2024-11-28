@@ -1,5 +1,7 @@
 import 'package:e_commerce/consts.dart';
+import 'package:e_commerce/state-management/theme_povider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -11,9 +13,15 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.chevron_left_rounded),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/catalogue');
+          },
+          icon: const Icon(Icons.chevron_left_rounded),
+        ),
         title: const Center(
           child: Text(
             'Profile',
@@ -25,9 +33,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(
+            icon: Icon(
               Icons.edit_rounded,
-              color: Colors.black,
+              color: themeProvider.isDarkTheme ? Colors.white : Colors.black,
             ),
           )
         ],
@@ -77,12 +85,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              const Center(
+              Center(
                 child: Text(
                   'Alisson Becker',
                   style: TextStyle(
                     fontSize: 24,
-                    color: Color(0xFF1A2530),
+                    color: themeProvider.isDarkTheme ? Colors.white : const Color(0xFF1A2530),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -90,12 +98,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(height: 30),
 
               // Full Name Field
-              const Text(
+              Text(
                 'Full Name',
                 style: TextStyle(
                   fontSize: defaultPadding,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF1A2530),
+                  color: themeProvider.isDarkTheme ? Colors.white : const Color(0xFF1A2530),
                 ),
               ),
               const SizedBox(height: 8),
@@ -115,12 +123,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(height: defaultPadding),
 
               // Email Field
-              const Text(
+              Text(
                 'Email Address',
                 style: TextStyle(
                   fontSize: defaultPadding,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF1A2530),
+                  color: themeProvider.isDarkTheme ? Colors.white : const Color(0xFF1A2530),
                 ),
               ),
               const SizedBox(height: 8),
@@ -140,12 +148,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(height: defaultPadding),
 
               // Password Field
-              const Text(
+              Text(
                 'Password',
                 style: TextStyle(
                   fontSize: defaultPadding,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF1A2530),
+                  color: themeProvider.isDarkTheme ? Colors.white : const Color(0xFF1A2530),
                 ),
               ),
               const SizedBox(height: 8),

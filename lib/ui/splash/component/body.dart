@@ -1,7 +1,9 @@
 
 import 'package:e_commerce/consts.dart';
+import 'package:e_commerce/state-management/theme_povider.dart';
 import 'package:e_commerce/ui/splash/component/splash_content.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -16,6 +18,7 @@ class _BodyState extends State<Body> {
   // List<String> product = List.generate(length, 
   // (index) => null
   // );
+  // untuk pindah halaman
   PageController _pageController = PageController();
 
   // Dasar pengambilan data API
@@ -36,6 +39,7 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       body: SafeArea( //biar gak ketumpuk sama appbar
         child: Column(
@@ -58,7 +62,7 @@ class _BodyState extends State<Body> {
                           text: splashData[index]["text"]!, 
                           image: splashData[index]["image"]!))), //harus ada text dan image
             ),
-            Expanded( //isi ruang kosong
+            Expanded( //isi ruang kosong flexible responsive dan memanfaatkan ruang yang kosong
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center, // biar ke tengah
               children:
@@ -74,7 +78,7 @@ class _BodyState extends State<Body> {
                 width: double.infinity, //biar di tengah
                 child: ElevatedButton( //button yang normal belum di styling
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black
+                    backgroundColor: themeProvider.isDarkTheme ? Colors.white : Colors.black,
                   ),
                   onPressed: () {
                     if (currentPage == splashData.length - 1) { //berpindah sesuai data
@@ -90,8 +94,8 @@ class _BodyState extends State<Body> {
                   }, //repersentasi dari function yang kosong (agar ga error)
                   child: Text(
                     currentPage == splashData.length - 1 ? "Start" : "Next",
-                    style: const TextStyle(
-                      color: Colors.white
+                    style: TextStyle(
+                      color: themeProvider.isDarkTheme ? Colors.black : Colors.white,
                     ),
                   )
                 ),
@@ -106,11 +110,14 @@ class _BodyState extends State<Body> {
 
   // kode untuk logika dots indikator
   AnimatedContainer _dotsIndicator({required int index}) { //kalo mau nambah required maka kasih {}
+  final themeProvider = Provider.of<ThemeProvider>(context);
     return AnimatedContainer(
       margin: const EdgeInsets.only(right: 10.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
-        color: currentPage == index ? Colors.black : secondaryColor,
+        color: currentPage == index 
+                      ? secondaryColor 
+                      : (themeProvider.isDarkTheme ? Colors.white : Colors.black),
       ),
       width: currentPage == index ? 20 : 10,
       height: 10,

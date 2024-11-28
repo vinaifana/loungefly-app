@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 // ketika menggunakan set management provider kita wajib memanggil ChangeNotifier
 // BLOC, Get X, Provider, Riverpod
+// mengimplementasikan konsep OOP --> inheritence (pewarisan)
 class ThemeProvider extends ChangeNotifier {
   // setter (ada _)
   // ThemeProvider itu mewariskan semua sifat dari ChageNotifier
@@ -15,7 +16,6 @@ class ThemeProvider extends ChangeNotifier {
     // untuk melakukan perubahan tema
     _loadTheme();
   }
-// TODO - PR untuk mengingat ini itu sebenarnya apa sih
 // getter (setter gak ada _)
 // getter itu public , bisa diakses di file lain. tapi tidak bisa dipakai di file yang mana dia build
   bool get isDarkTheme => _isDarkTheme;
