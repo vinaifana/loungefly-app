@@ -22,13 +22,7 @@ class FavoriteScreen extends StatelessWidget {
       ),
       body: favoriteProvider.favoriteItems.isEmpty
       ? const Center(child: Text("Your Favorite is Empty"))
-      : GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: defaultPadding,
-          crossAxisSpacing: defaultPadding,
-          childAspectRatio: 0.75
-        ),
+      : ListView.builder(
         itemCount: favoriteProvider.favoriteItems.length,
         itemBuilder: (context, index) {
           final favoriteItem = favoriteProvider.favoriteItems.values.toList()[index];
